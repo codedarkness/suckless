@@ -1,0 +1,34 @@
+#!/bin/sh
+#  ____             _                         ____          _
+# |  _ \  __ _ _ __| | ___ __   ___  ___ ___ / ___|___   __| | ___
+# | | | |/ _' | '__| |/ / '_ \ / _ \/ __/ __| |   / _ \ / _' |/ _ \
+# | |_| | (_| | |  |   <| | | |  __/\__ \__ \ |__| (_) | (_| |  __/
+# |____/ \__,_|_|  |_|\_\_| |_|\___||___/___/\____\___/ \__,_|\___|
+# -----------------------------------------------------------------
+# https://darkncesscode.xyz
+# https://github.com/codedarkness
+# -----------------------------------------------------------------
+#
+#        FILE: dc-scrot
+#       USAGE: ./dc-scrot
+#
+# DESCRIPTION: simple script to take screenshot with scrot
+#
+#      AUTHOR: DarknessCode
+#       EMAIL: achim@darknesscode.xyz
+#
+#     CREATED: 11-08-20 18:32
+#
+# -----------------------------------------------------------------
+
+## Pictures directory
+### Check for dir, if not found create it using the mkdir ###
+pictures="$HOME/Pictures"
+[ ! -d "$pictures" ] && mkdir -p "$pictures" &&
+
+	notify-send "$pictures directory was created"
+
+	scrot '%Y-%m-%-d_%H:%M:%S.png' \
+	   	-e 'mv $f ~/Pictures' &&
+		notify-send " Screenshot saved in $pictures " ||
+		notify-send " Something is brocken in your system "

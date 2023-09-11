@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=dwm
+Comment=dwm window manager
+Exec=/usr/local/bin/dwm
+Type=Application
+X-LightDM-DesktopName=dwm
+DesktopNames=dwm
+Keywords=tiling;wm;windowmanager;window;manager;

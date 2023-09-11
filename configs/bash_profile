@@ -1,0 +1,10 @@
+#
+# ~/.bash_profile
+#
+
+export EDITOR="vim"
+export TERMINAL="alacritty"
+export BROWUSER="qutebrowser"
+export TRUEBROWSER="brave"
+
+[[ -f ~/.bashrc ]] && . ~/.bashrc

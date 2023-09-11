@@ -1,0 +1,307 @@
+snippet signature "DarknessCode" b
+##  ____             _                         ____          _
+## |  _ \  __ _ _ __| | ___ __   ___  ___ ___ / ___|___   __| | ___
+## | | | |/ _' | '__| |/ / '_ \ / _ \/ __/ __| |   / _ \ / _' |/ _ \
+## | |_| | (_| | |  |   <| | | |  __/\__ \__ \ |__| (_) | (_| |  __/
+## |____/ \__,_|_|  |_|\_\_| |_|\___||___/___/\____\___/ \__,_|\___|
+## -----------------------------------------------------------------
+## https://darkncesscode.xyz
+## https://github.com/codedarkness
+## -----------------------------------------------------------------
+endsnippet
+
+snippet bash "personal shebang for sh files" b
+#!/bin/bash
+#  ____             _                         ____          _
+# |  _ \  __ _ _ __| | ___ __   ___  ___ ___ / ___|___   __| | ___
+# | | | |/ _' | '__| |/ / '_ \ / _ \/ __/ __| |   / _ \ / _' |/ _ \
+# | |_| | (_| | |  |   <| | | |  __/\__ \__ \ |__| (_) | (_| |  __/
+# |____/ \__,_|_|  |_|\_\_| |_|\___||___/___/\____\___/ \__,_|\___|
+# -----------------------------------------------------------------
+# https://darkncesscode.xyz
+# https://github.com/codedarkness
+# -----------------------------------------------------------------
+#
+#        FILE: ${1:---}
+#       USAGE: ${2:---}
+#
+# DESCRIPTION: ${3:---}
+#
+#      AUTHOR: ${4:---}
+#       EMAIL: ${5:---}
+#
+#     CREATED: ${6:---}
+#
+# -----------------------------------------------------------------
+
+$0
+endsnippet
+
+snippet newmd "new tags for md files" b
+---
+title: "${1:---}"
+date: ${2:---}
+slug: "${3:---}"
+draft: ${4:---}
+author: "${5:---}"
+categories: ["${6:---}"]
+---
+endsnippet
+
+snippet menu "Bash menu" b
+first-option() {
+	echo " Start Here";
+}
+
+press_enter() {
+	echo ""
+	echo -n " Press Enter To Continue"
+	read
+	clear
+}
+
+incorrect_selection() {
+	echo " Incorrect selection! try again"
+}
+
+until [ "$selection" = "0" ]; do
+	clear
+	echo ""
+	echo " DarknessCode"
+	echo ""
+	echo " Title or something else"
+	echo ""
+	echo " 1 - Name/Options"
+	echo " 2 - Name/Options"
+	echo " 3 - Name/Options"
+	echo " 4 - Name/Options"
+	echo " 0 - Exit"
+	echo ""
+	echo -n " Enter selection [1 - 0] : "
+	read selection
+	echo ""
+
+	case $selection in
+		1) clear; Name/Options ; press_enter ;;
+		2) clear; Name/Options ; press_enter ;;
+		3) clear; Name/Options ; press_enter ;;
+		4) clear; Name/Options ; press_enter ;;
+		0) clear; exit ;;
+		*) clear; incorrect_selection ; press_enter ;;
+	esac
+done
+endsnippet
+
+snippet whiledo "Do a while do option" b
+while true; do
+	read -p "${1:Description} : " yn
+	case $yn in
+		[Yy]* )
+			${2:funcion} ;;
+		[Nn]* )
+			${3:funcion} ; exit 0 ;;
+		* ) echo "Please answer yes or no." ;;
+	esac
+done
+
+$0
+endsnippet
+
+snippet install "Menu to install software" b
+while true; do
+	read -p " ${1:-SoftwareName} [y - n] : " yn
+	case $yn in
+		[Yy]* )
+			if ! location="$(type -p "${2:-Software}")" || [ -z "${3:-Software}" ]; then
+
+				# check if pacman is installed
+				if which pacman > /dev/null; then
+
+					sudo pacman -S --noconfirm ${4:-Software}
+
+				# check if apt is installed
+				elif which apt > /dev/null; then
+
+					sudo apt install -y ${5:-Software}
+
+				# check xbps is inatalled
+				elif which xbps-install > /dev/null; then
+
+					sudo xbps-install -y ${6:-Software}
+				else
+
+					echo " Your system is not Arch or Debian Based System"
+				fi
+
+				else
+					echo " Nothing to do! ${6:-Software} is installed in your System"
+			fi ; break ;;
+		[Nn]* )
+			break ;;
+		* ) echo "Please answer yes or no." ;;
+	esac
+done
+endsnippet
+
+snippet checkdir "Check or create directory" b
+## ${1:-name} directory
+### Check for dir, if not found create it using the mkdir ###
+${2:-name}="$HOME/.config/${3:-name}"
+[ ! -d "$${4:-name}" ] && mkdir -p "$${5:-name}" &&
+echo " ${6:-name} directory was created" || echo " $${7:-name} already exist!"
+echo ""
+endsnippet
+
+snippet epubcover "epub cover" b
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title></title>
+  <link href="../Styles/style.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+/* no modificar estos estilos */
+  .cubierta { margin:0; padding:0; border:0; font-size:0; text-indent:0; text-align:center; }
+        .cubierta img { height:100%; max-height:100%; }
+  /* no modificar estos estilos */
+</style>
+</head><!-- no modificar esta página -->
+<!-- atención: por problemas de compatibilidad con algunos dispositivos EN NINGÚN CASO los archivos de imágenes deben exceder los 300k de tamaño -->
+
+<body class="sinmargen">
+  <h1 class="cubierta" id="sigil_toc_id_1" title="Cubierta"><img alt="" src="../Images/cover.jpg" /></h1>
+</body>
+</html>
+endsnippet
+
+snippet epubtitle "css styles for epub title" b
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+  "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title></title>
+  <link href="../Styles/style.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+/* no modificar estos estilos */
+  .eBOOKtitulo, .eBOOKsubtitulo, .eBOOKautor, .eBOOKv, .eBOOKfirma { text-align:right; text-indent:0; font-weight:normal; }
+        .eBOOKautor { margin-bottom:0.5em; margin-top:45%}
+            .eBOOKautor code { font-size:1.2em; color:#595959; }
+        .eBOOKtitulo { margin:-0.7em 0 0; font-size:1.5em; }
+            .eBOOKtitulo code { font-size:1.5em; font-weight:bold; }
+        .eBOOKsubtitulo { margin:-0.4em 0 0; }
+            .eBOOKsubtitulo code { font-size:1.1em; font-weight:bold; }
+        .eBOOKv, .eBOOKv code { margin:-0.3em 0 0; font-size:0.9em; font-weight:bold; color:#5084b8; }
+        .eBOOKfirma, .eBOOKfirma strong, .eBOOKfirma code { margin:-0.4em 0 0; font-size:0.9em; }
+        .eBOOKfecha { color:#595959; }
+  /* no modificar estos estilos */
+</style>
+</head>
+
+<body>
+  <p class="eBOOKautor"><code class="sans">Autor</code></p>
+
+  <h1 class="eBOOKtitulo" id="sigil_toc_id_2"><code class="sans">Titulo</code></h1>
+
+  <p class="eBOOKsubtitulo"><code class="sans">Subtitulo</code></p><!-- esta línea es opcional, debe eliminarse si no tiene texto -->
+
+  <p class="eBOOKv"><code class="sans">eBook v1.0</code></p>
+
+  <p class="eBOOKfirma"><strong class="sans">autor</strong> <code class="eBOOKfecha sans">00.00.00</code></p>
+</body>
+</html>
+endsnippet
+
+snippet epubcss "add full css for epub css file" b
+/* eBook's Xibalba */
+
+/* -------- ESTILOS NO MODIFICABLES -------- */
+body { font-family:"Times New Roman", Times, serif; margin:1em; }
+p { margin:0; text-align:justify; text-indent:1.5em; line-height:1.3em; }
+a { text-decoration:none; }
+sup, sub { font-size:0.75em; line-height:normal; }
+/* ----------------------------------------- */
+
+/* encabezados */
+h1, h2, h3, h4, h5, h6 { margin-top:15%; text-align:center; text-indent:0; -webkit-hyphens:none; adobe-hyphenate:none; -moz-hyphens:none; hyphens:none; }
+	h1 { font-size:1.7em; }
+	h2 { font-size:1.6em; }
+	h3 { font-size:1.5em; }
+	h4 { font-size:1.4em; }
+	h5 { font-size:1.3em; }
+	h6 { font-size:1.2em; }
+
+/* tipografía */
+.sans, .sans em, .sans strong { font-family:"Helvetica Neue", Helvetica, Verdana, Arial, "Trebuchet MS", Trebuchet, sans-serif; }
+.mono, .mono em, .mono strong { font-family:"Courier New", Courier, monospace; }
+
+.cursiva, em, i { font-style:italic; }
+.negrita, strong, b { font-weight:bold; }
+.tachado, strike, s { text-decoration:underline; }
+.subrayado, u { text-decoration:line-through; }
+.normal { font-style:normal; font-weight:normal; text-decoration:none; }
+
+.versalita { font-size:0.8em; } /* para texto en mayúsculas cuyo tamaño, sin embargo, es similar al de las minúsculas */
+
+/* alineación */
+.izquierda, .izquierda p { text-align:left; }
+.derecha, .derecha p { text-align:right; text-indent:0; }
+.centrado, .centrado p { text-align:center; text-indent:0; }
+.justificado, .justificado p { text-align:justify; }
+.asangre, .asangre p { text-indent:0; }
+
+/* saltos */
+.saltoinicio { margin-top:33%; }
+.salto25 { padding-top:2.5em; }
+.salto10 { padding-top:1em; }
+
+/* bloques */
+.sinmargen { margin:0; }
+.cita { margin:1.5em; }
+.bloque { page-break-inside:avoid; } /* evita que un elemento se divida entre dos páginas en algunos lectores */
+.banner { margin:1.5em 12%; padding:0.5em 1em; text-align:center; text-indent:0; border:2px solid black; border-left:none; border-right:none; }
+.banner p { text-align:center; text-indent:0; }
+
+/* listas */
+li { text-align:justify; line-height:1.3em; }
+
+/* ------------- AÑADE AQUÍ TUS PROPIOS ESTILOS -------------  */
+
+.capitulo { font-size:1.5em; 
+	font-weight:normal; 
+	border:1px solid #8B0000; 
+	height:0px; 
+	background-color:#000000; 
+	margin:30% 0% 7% 0;
+}
+
+.capitulo span { float:left; 
+	margin:-0.85em 0 0 10%; 
+	background-color:white; 
+	padding:0.3em; 
+	font-family:"Times New Roman";
+}
+endsnippet
+
+snippet gmifoot "add gemini footer to files" b
+
+----------
+
+=> / Home
+=> /linux/index.gmi Linux
+=> /notes/index.gmi Notes
+=> /microlog/index.gmi MicroLog
+
+----------
+
+© DarknessCode
+endsnippet
+
+snippet url "add url link" b
+<a href="https://www.ups.com/track?loc=null&tracknum=${2:-trackingnumber}" target="_blank">${2:-trackingnumber}</a>
+endsnippet

@@ -1,0 +1,24 @@
+# General
+set selection-clipboard clipboard
+
+# Open document in fit-width mode by default
+set adjust-open "best-fit"
+
+# One page per row by default
+set pages-per-row 1
+
+#stop at page boundries
+set scroll-page-aware "true"
+set smooth-scroll "true"
+set scroll-full-overlap 0.01
+set scroll-step 100
+
+# Colors
+set default-bg "#1E1F29"
+set statusbar-bg "#1E1F29"
+set inputbar-bg "#1E1F29"
+
+
+unmap f
+map f toggle_fullscreen
+map [fullscreen] f toggle_fullscreen
