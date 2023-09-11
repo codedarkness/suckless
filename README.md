@@ -53,7 +53,7 @@ sudo chmod +x void-suckless.sh
 - More Software
     * Inclued a list of software that I usualy install (libreries, CLIs, TUIs, GUIs)
 
-## Patches Applied
+## Patches
 
 - DWM
     * attachaside - master always in the left
