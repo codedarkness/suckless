@@ -119,6 +119,8 @@ sudo mv /usr/lib/python3.11/EXTERNALLY-MANAGED /usr/lib/python3.11/EXTERNALLY-MA
 declare -A python_software
 python_software[castero]="castero"
 python_software[pyradio]="pyradio"
+python_software[youtube-dl]="youtube_dl"
+python_software[yt-dlp]="yt-dlp"
 
 pip install "${python_software[@]}" && echo -e "${GREEN}Success.....${END}" || echo -e "${RED}LinuxSucks..........${END}"
 
@@ -190,7 +192,7 @@ conf_directories[ranger]="$HOME/Templates/suckless/configs/ranger $HOME/.config"
 conf_directories[zathura]="$HOME/Templates/suckless/configs/zathura $HOME/.config"
 
 for cdirectory in "${conf_directories[@]}"; do
-    cp -r $cdirectory && echo -e "${GREEN} $cdirectory ${END}copied" || echo -e "${RED}LinuxSucks..........${END}"
+    cp -r $cdirectory && echo -e "${GREEN}$cdirectory${END} copied" || echo -e "${RED}LinuxSucks..........${END}"
 done
 
 declare -A su_files
@@ -200,7 +202,7 @@ su_files[dc-scrot]="$HOME/Templates/suckless/configs/dc-scrot /usr/bin/"
 su_files[lightdm-mini]="$HOME/Templates/suckless/configs/lightdm-mini-greeter.conf /etc/lightdm/"
 
 for sfile in "${su_files[@]}"; do
-    sudo cp $sfile && echo -e "${GREEN} $sfile ${END}copied" || echo -e "${RED}LinuxSucks..........${END}"
+    sudo cp $sfile && echo -e "${GREEN}$sfile${END} copied" || echo -e "${RED}LinuxSucks..........${END}"
 done
 
 ## Suckless (dwm, dmenu, slstatus, st)
@@ -226,6 +228,8 @@ sudo systemctl enable lightdm -f &&
 sudo ln -s $HOME/.local/bin/arigram /usr/bin &&
 sudo ln -s $HOME/.local/bin/castero /usr/bin &&
 sudo ln -s $HOME/.local/bin/pyradio /usr/bin &&
+sudo ln -s $HOME/.local/bin/yt-dlp /usr/bin &&
+sudo ln -s $HOME/.local/bin/youtube_dl /usr/bin &&
 echo -e "${GREEN}Setup is done!!${END}" || echo -e "${RED}LinuxSucks..........${END}"
 echo ""
 
