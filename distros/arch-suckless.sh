@@ -142,7 +142,7 @@ done
 [ ! -d "/usr/share/xsessions" ] && sudo mkdir -p /usr/share/xsessions && echo echo -e "${GREEN}xsessions${END} Directoy vas created" || echo -e "${RED}xsessions${END} already exist..."
 
 ## Git Repos
-getsuckless="https://github.com/codedarkness/sucklesslinux.git"
+getsuckless="https://github.com/codedarkness/suckless.git"
 getdracula="https://github.com/dracula/gtk.git"
 getarigram="https://github.com/TruncatedDinosour/arigram.git"
 getminigreeter="https://github.com/prikhi/lightdm-mini-greeter.git"
