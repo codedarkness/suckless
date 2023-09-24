@@ -103,11 +103,14 @@ software[musikcube]="musikcube"
 software[neofetch]="neofetch"
 software[neomutt]="neomutt"
 software[neovim]="neovim"
+software[pipe-viewer]="pipe-viewer"
 software[pyradio]="pyradio"
 software[ranger]="ranger"
 software[transmission]="transmission"
 software[w3m-img]="w3m-img"
 software[w3m]="w3m"
+software[youtube-dl]="youtube-dl"
+software[yt-dlp]="yt-dlp"
 ## GUIs
 software[calibre]="calibre"
 software[gimp]="gimp"
@@ -135,11 +138,11 @@ directories[dwm]="$HOME/.dwm"
 directories[nitrogen]="$HOME/.config/nitrogen"
 
 for directory in ${directories[@]}; do
-    [ ! -d "$directory" ] && mkdir -p "$directory" && echo -e "${GREEN}$directory${END} Directoy vas created" || echo "${RED}$directory${END} already exist..."
+    [ ! -d "$directory" ] && mkdir -p "$directory" && echo -e "${GREEN}$directory${END} Directoy vas created" || echo -e "${RED}$directory${END} already exist..."
 done
 
 ## xsession directory not present in void linux
-[ ! -d "/usr/share/xsessions" ] && sudo mkdir -p /usr/share/xsessions && echo -e "${GREEN}xsessions${END} Directoy vas created" || echo "${RED}xsessions${END} already exist..."
+[ ! -d "/usr/share/xsessions" ] && sudo mkdir -p /usr/share/xsessions && echo -e "${GREEN}xsessions${END} Directoy vas created" || echo -e "${RED}xsessions${END} already exist..."
 
 ## Git Repos
 getsuckless="https://github.com/codedarkness/suckless.git"
@@ -166,7 +169,7 @@ files[wall]="$HOME/Templates/suckless/configs/nitrogen/wall.png $HOME/Pictures/W
 files[xresources]="$HOME/Templates/suckless/configs/Xresources $HOME/.Xresources"
 
 for file in "${files[@]}"; do
-    cp $file && echo -e "${GREEN} $file copied" || echo -e "${RED}LinuxSucks..........${END}"
+    cp $file && echo -e "${GREEN}$file${END} copied" || echo -e "${RED}LinuxSucks..........${END}"
 done
 
 declare -A conf_directories
@@ -187,7 +190,7 @@ conf_directories[ranger]="$HOME/Templates/suckless/configs/ranger $HOME/.config"
 conf_directories[zathura]="$HOME/Templates/suckless/configs/zathura $HOME/.config"
 
 for cdirectory in "${conf_directories[@]}"; do
-    cp -r $cdirectory && echo -e "${GREEN} $cdirectory ${END}copied" || echo -e "${RED}LinuxSucks..........${END}"
+    cp -r $cdirectory && echo -e "${GREEN}$cdirectory${END} copied" || echo -e "${RED}LinuxSucks..........${END}"
 done
 
 declare -A su_files
@@ -197,7 +200,7 @@ su_files[dwm-desktop]="$HOME/Templates/suckless/configs/dwm.desktop /usr/share/x
 su_files[lightdm-mini]="$HOME/Templates/suckless/configs/lightdm-mini-greeter.conf /etc/lightdm/"
 
 for sfile in "${su_files[@]}"; do
-    sudo cp $sfile && echo -e "${GREEN} $sfile ${END}copied" || echo -e "${RED}LinuxSucks..........${END}"
+    sudo cp $sfile && echo -e "${GREEN}$sfile${END} copied" || echo -e "${RED}LinuxSucks..........${END}"
 done
 
 ## Suckless (dwm, dmenu, slstatus, st)
@@ -226,10 +229,10 @@ echo "##### NOTE #####"
 echo -e "${RED}If lightdm is enable now, you need to login into your account"
 echo -e "then you need to reboot the system inside the session"
 echo -e "If you don't enabled lightdm now you need to enabled it manualy${END}"
-echo -e "[y = yes] - [n = no] - [r = reboot]"
+echo -e "[y = yes] - [n = no]"
 
 while true; do
-	read -p "Enable lightdm or Reboot [y - n - r] : " yn
+	read -p "Enable lightdm [y - n] : " yn
 	case $yn in
 		[Yy]* )
 			#sudo ln -s /etc/sv/NetworkManager /var/service/NetworkManager
@@ -237,8 +240,6 @@ while true; do
 			sudo ln -s /etc/sv/lightdm /var/service/lightdm; exit ;;
 		[Nn]* )
 			echo -e "${RED}Don't forget to enable lightdm after reboot${END}"; break ;;
-		[Rr]* )
-			sudo reboot; exit ;;
 		*)	echo "Please answer yes or no."
 	esac
 done
