@@ -222,6 +222,7 @@ sudo sed -i 's/#greeter-session=example-gtk-gnome/greeter-session=lightdm-mini-g
 sudo sed -i 's/#user-session=default/user-session=dwm/g' /etc/lightdm/lightdm.conf &&
 sudo chmod +x /usr/bin/blurlock &&
 sudo chmod +x /usr/bin/dc-scrot &&
+python -m pip install --user --upgrade pynvim &&
 echo -e "${GREEN}Setup is done!!${END}" || echo -e "${RED}LinuxSucks..........${END}"
 echo ""
 
