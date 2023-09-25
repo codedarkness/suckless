@@ -248,6 +248,7 @@ sudo sed -i 's/#greeter-session=example-gtk-gnome/greeter-session=lightdm-mini-g
 sudo sed -i 's/#user-session=default/user-session=dwm/g' /etc/lightdm/lightdm.conf &&
 sudo chmod +x /usr/bin/blurlock &&
 sudo chmod +x /usr/bin/dc-scrot &&
+python -m pip install --user --upgrade pynvim &&
 sudo systemctl enable lightdm -f &&
 sudo ln -s $HOME/.local/bin/arigram /usr/bin &&
 sudo ln -s $HOME/.local/bin/castero /usr/bin &&
