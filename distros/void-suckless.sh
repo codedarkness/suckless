@@ -43,6 +43,9 @@ echo "    \/ \___/|_|\__,_|______|_|_| |_|\__,_/_/\_\ "
 echo -e "${YELLOW}The installation will start soon!!!${END} $_user"
 sleep 5
 
+## Update xbps
+sudo xbps-install -S xbps
+
 ## Update Void Linux
 sudo xbps-install -Syu
 

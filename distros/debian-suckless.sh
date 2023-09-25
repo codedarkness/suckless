@@ -162,7 +162,7 @@ for directory in ${directories[@]}; do
 done
 
 ## checking xsession directory
-[ ! -d "/usr/share/xsessions" ] && sudo mkdir -p /usr/share/xsessions && echo -e "${GREEN}$directory${END} Directoy vas created" || echo -e "${RED}xsessions${END} directory already exist..."
+#[ ! -d "/usr/share/xsessions" ] && sudo mkdir -p /usr/share/xsessions && echo -e "${GREEN}$directory${END} Directoy vas created" || echo -e "${RED}xsessions${END} directory already exist..."
 
 ## Git Repos
 getsuckless="https://github.com/codedarkness/suckless.git"
