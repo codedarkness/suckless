@@ -114,7 +114,7 @@ software[zathura]="zathura"
 sudo pacman -S --noconfirm --needed "${software[@]}" && echo -e "${GREEN}Success.....${END}" || echo -e "${RED}LinuxSucks..........${END}"
 
 ## Removing the annoying python warning for external python packages
-sudo mv /usr/lib/python3.11/EXTERNALLY-MANAGED /usr/lib/python3.11/EXTERNALLY-MANAGED_backup
+[ -f "/usr/lib/python3.11/EXTERNALLY-MANAGED" ] && sudo mv /usr/lib/python3.11/EXTERNALLY-MANAGED /usr/lib/python3.11/EXTERNALLY-MANAGED_backup || echo -e "${GREEN}Externally-Managed no found... ${END}"
 
 declare -A python_software
 python_software[castero]="castero"
@@ -231,16 +231,7 @@ sudo ln -s $HOME/.local/bin/castero /usr/bin &&
 sudo ln -s $HOME/.local/bin/pyradio /usr/bin &&
 sudo ln -s $HOME/.local/bin/yt-dlp /usr/bin &&
 sudo ln -s $HOME/.local/bin/youtube_dl /usr/bin &&
+rm $HOME/arch-suckless.sh &&
+rm $HOME/suckless-linux.sh &&
 echo -e "${GREEN}Setup is done!!${END}" || echo -e "${RED}LinuxSucks..........${END}"
 echo ""
-
-while true; do
-	read -p "Would you like to restart you system now [y - n] : " yn
-	case $yn in
-		[Yy]* )
-			sudo reboot ;;
-		[Nn]* )
-			break ;;
-		* ) echo "Please answer yes or no." ;;
-	esac
-done

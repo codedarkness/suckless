@@ -226,6 +226,8 @@ sudo sed -i 's/#user-session=default/user-session=dwm/g' /etc/lightdm/lightdm.co
 sudo chmod +x /usr/bin/blurlock &&
 sudo chmod +x /usr/bin/dc-scrot &&
 python -m pip install --user --upgrade pynvim &&
+rm $HOME/void-suckless.sh &&
+rm $HOME/suckless-linux.sh &&
 echo -e "${GREEN}Setup is done!!${END}" || echo -e "${RED}LinuxSucks..........${END}"
 echo ""
 
