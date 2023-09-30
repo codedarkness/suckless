@@ -22,25 +22,18 @@
 #
 # -----------------------------------------------------------------
 
-font="-fn 'Noto-11'"
-nb="-nb #222D31"
-sb="-sb #222D31"
-sf="-sf #FAF9FA"
-nf="-nf #839192"
+font="-fn 'Noto-14'"
 
 declare options=("Cancel
 Lock-Screen
 Exit
 Shutdown
 Reboot
-Suspend
-Hibernate
-Hybrid-Sleep
-Suspen-Hibernate")
+Suspend")
 
 choice=$(
 	echo -e "${options[@]}" |
-	dmenu -i -p 'Select an Option: ' $font $nb $sb $sf $nf
+	dmenu -i -c -l 6 $font $nb $sb $sf $nf
 )
 
 case "$choice" in
@@ -50,9 +43,6 @@ case "$choice" in
 	Shutdown)	systemctl poweroff ;;
 	Reboot)		systemctl reboot ;;
 	Suspend)	systemctl suspend ;;
-	Hibernate)	systemctl hibernate ;;
-	Hybrid-Sleep)	systemctl hibernate ;;
-	Suspend-Hibernate)	systemctl suspend-then-hibernate ;;
 	*) exit 1 ;;
 esac
 

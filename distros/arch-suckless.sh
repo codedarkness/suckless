@@ -188,6 +188,7 @@ conf_directories[musikcube]="$HOME/Templates/suckless/configs/musikcube $HOME/.c
 conf_directories[nvim]="$HOME/Templates/suckless/configs/nvim $HOME/.config"
 conf_directories[picom]="$HOME/Templates/suckless/configs/picom $HOME/.config"
 conf_directories[pyradio]="$HOME/Templates/suckless/configs/pyradio $HOME/.config"
+conf_directories[qutebrowser]="$HOME/Templates/suckless/configs/qutebrowser $HOME/.config"
 conf_directories[ranger]="$HOME/Templates/suckless/configs/ranger $HOME/.config"
 conf_directories[zathura]="$HOME/Templates/suckless/configs/zathura $HOME/.config"
 
