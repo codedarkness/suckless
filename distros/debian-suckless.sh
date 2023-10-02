@@ -104,6 +104,7 @@ software[wget]="wget"
 software[xarchiver]="xarchiver"
 software[xautolock]="xautolock"
 software[xorg]="xorg"
+software[xserver-xorg]="xserver-xorg"
 software[zip]="zip"
 ## TUIs & CLIs
 software[alacritty]="alacritty"
