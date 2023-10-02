@@ -21,7 +21,7 @@
 #
 # -----------------------------------------------------------------
 
-set -euo pipefail
+#set -euo pipefail
 
 _user="$USER"
 
@@ -43,7 +43,7 @@ echo "|_____/ \___|_.__/|_|\__,_|_| |_| "
 echo -e "${YELLOW}The installation will start soon!!!${END} $_user"
 sleep 5
 
-## Update Void Linux
+## Update Debian
 sudo apt update && sudo apt dist-upgrade -y
 
 ## Software
@@ -162,7 +162,7 @@ for directory in ${directories[@]}; do
 done
 
 ## checking xsession directory
-#[ ! -d "/usr/share/xsessions" ] && sudo mkdir -p /usr/share/xsessions && echo -e "${GREEN}$directory${END} Directoy vas created" || echo -e "${RED}xsessions${END} directory already exist..."
+[ ! -d "/usr/share/xsessions" ] && sudo mkdir -p /usr/share/xsessions && echo -e "${GREEN}$directory${END} Directoy vas created" || echo -e "${RED}xsessions${END} directory already exist..."
 
 ## Git Repos
 getsuckless="https://github.com/codedarkness/suckless.git"
@@ -241,6 +241,13 @@ for suck in ${suckless[@]}; do
     cd $suck && sudo make clean install || echo -e "${RED}LinuxSucks..........${END}"
 done
 
+## Check for binaries installed with pip
+[ -f "/usr/bin/arigram" ] && echo -e "${GREEN}Arigram${END} Found" || sudo ln -s $HOME/.local/bin/arigram /usr/bin
+[ -f "/usr/bin/castero" ] && echo -e "${GREEN}Castero${END} Found" || sudo ln -s $HOME/.local/bin/castero /usr/bin
+[ -f "/usr/bin/pyradio" ] && echo -e "${GREEN}PyRadio${END} Found" || sudo ln -s $HOME/.local/bin/pyradio /usr/bin
+[ -f "/usr/bin/yt-dlp" ] && echo -e "${GREEN}YT-DLP${END} Found" || sudo ln -s $HOME/.local/bin/yt-dlp /usr/bin
+[ -f "/usr/bin/youtube_dl" ] && echo -e "${GREEN}Youtube_dl${END} Found" || sudo ln -s $HOME/.local/bin/youtube_dl /usr/bin
+
 ## Setup Lighdm and greeter and wallpaper
 sed -i 's/USER/'$_user'/g' $HOME/.config/nitrogen/bg-saved.cfg &&
 sed -i 's/USER/'$_user'/g' $HOME/.config/nitrogen/nitrogen.cfg &&
@@ -249,13 +256,8 @@ sudo sed -i 's/#greeter-session=example-gtk-gnome/greeter-session=lightdm-mini-g
 sudo sed -i 's/#user-session=default/user-session=dwm/g' /etc/lightdm/lightdm.conf &&
 sudo chmod +x /usr/bin/blurlock &&
 sudo chmod +x /usr/bin/dc-scrot &&
-python -m pip install --user --upgrade pynvim &&
-sudo systemctl enable lightdm -f &&
-sudo ln -s $HOME/.local/bin/arigram /usr/bin &&
-sudo ln -s $HOME/.local/bin/castero /usr/bin &&
-sudo ln -s $HOME/.local/bin/pyradio /usr/bin &&
-sudo ln -s $HOME/.local/bin/yt-dlp /usr/bin &&
-sudo ln -s $HOME/.local/bin/youtube_dl /usr/bin &&
+python3 -m pip install --user --upgrade pynvim &&
+sudo systemctl enable lightdm &&
 rm $HOME/debian-suckless.sh &&
 rm $HOME/suckless-linux.sh &&
 echo -e "${GREEN}Setup is done!!${END}" || echo -e "${RED}LinuxSucks..........${END}"

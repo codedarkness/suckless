@@ -43,7 +43,7 @@ echo "/_/    \_\_|  \___|_| |_|______|_|_| |_|\__,_/_/\_\ "
 echo -e "${YELLOW}The installation will start soon!!!${END} $_user"
 sleep 5
 
-## Update Void Linux
+## Update Arch Linux
 sudo pacman -Syu --noconfirm --needed
 
 ## Software
