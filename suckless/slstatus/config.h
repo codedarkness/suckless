@@ -75,6 +75,7 @@ static const struct arg args[] = {
 	/* function format          argument */
 	{ cpu_perc,		"^c#AF6015^CPU %s% ^c#7D7F8C^: ",	NULL },
 	{ temp,     	"^c#5DADE2^TEM %s°C ^c#7D7F8C^: ",	"/sys/class/hwmon/hwmon3/temp1_input" },
+	/* { temp,     	"^c#5DADE2^TEM %s°C ^c#7D7F8C^: ",	"/sys/class/thermal/thermal_zone3/temp" }, */
 	{ ram_used, 	"^c#D7BDE2^MEM %s ^c#7D7F8C^: ",		NULL } ,
 	{ disk_free,	"^c#7FC6B6^SSD %s ^c#7D7F8C^: ",		"/" },
 	/* { battery_perc, "^c#E1ACFF^BAT %s% ^c#7D7F8C^: ",	"BAT0" }, */

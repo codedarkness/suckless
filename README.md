@@ -9,35 +9,13 @@ This installation is a start point for build my system when I need to install or
 This script must be run only in a fresh minimal install. Based on the distro: 
 
 - Arch Linux
-
-```
-curl -LO https://darknesscode.xyz/arch-suckless.sh
-sudo chmod +x arch-suckless.sh
-./arch-suckless.sh
-```
-
 - Debian
-
-```
-curl -LO https://darknesscode.xyz/debian-suckless.sh
-sudo chmod +x debian-suckless.sh
-./debian-suckless.sh
-```
-
-- openSUSE
-
-```
-curl -LO https://darknesscode.xyz/opensuse-suckless.sh
-sudo chmod +x opensue-suckless.sh
-./opensuse-suckless.sh
-```
-
 - Void Linux
 
 ```
-curl -LO https://darknesscode.xyz/void-suckless.sh
-sudo chmod +x void-suckless.sh
-./void-suckless.sh
+curl -LO https://darknesscode.xyz/suckless-linux.sh
+sudo chmod +x suckless-linux.sh
+./suckless-linux.sh
 ```
 
 ## To Be Install
