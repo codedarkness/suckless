@@ -85,7 +85,7 @@ software[libxss-dev]="libxss-dev"
 software[lightdm]="lightdm"
 software[lm-sensors]="lm-sensors"
 software[make]="make"
-software[network-manager]="network-manager"
+#software[network-manager]="network-manager"
 software[papirus-icon-theme]="papirus-icon-theme"
 software[picom]="picom"
 software[pkg-config]="pkg-config"
@@ -163,7 +163,7 @@ for directory in ${directories[@]}; do
 done
 
 ## checking xsession directory
-[ ! -d "/usr/share/xsessions" ] && sudo mkdir -p /usr/share/xsessions && echo -e "${GREEN}$directory${END} Directoy vas created" || echo -e "${RED}xsessions${END} directory already exist..."
+#[ ! -d "/usr/share/xsessions" ] && sudo mkdir -p /usr/share/xsessions && echo -e "${GREEN}$directory${END} Directoy vas created" || echo -e "${RED}xsessions${END} directory already exist..."
 
 ## Git Repos
 getsuckless="https://github.com/codedarkness/suckless.git"
@@ -179,6 +179,9 @@ getmusikcube=$(curl -s https://api.github.com/repos/clangen/musikcube/releases/l
 [ ! -d "$HOME/Templates/arigram" ] && git clone $getarigram $HOME/Templates/arigram && cd $HOME/Templates/arigram && ./do local && sudo rm -r $HOME/Templates/arigram || echo -e "${RED}Git repo already exist...${END}"
 
 [ ! -d "$HOME/Templates/minigreeter" ] && git clone $getminigreeter $HOME/Templates/minigreeter && cd $HOME/Templates/minigreeter && ./autogen.sh && ./configure --datadir=/usr/share --bindir=/usr/bin --sysconfdir=/etc && make && sudo make install && sudo rm -r $HOME/Templates/minigreeter || echo -e "${RED}Git repo already exist...${END}"
+
+echo "Press Enter to Continue"
+read
 
 [ ! -f "musikcube.deb" ] && wget -O musikcube.deb $getmusikcube && sudo apt install ./musikcube.deb && rm musikcube.deb || echo -e "${RED}LinuxSucks..........${END}" 
 
