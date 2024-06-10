@@ -114,7 +114,7 @@ software[zathura]="zathura"
 sudo pacman -S --noconfirm --needed "${software[@]}" && echo -e "${GREEN}Success.....${END}" || echo -e "${RED}LinuxSucks..........${END}"
 
 ## Removing the annoying python warning for external python packages
-[ -f "/usr/lib/python3.11/EXTERNALLY-MANAGED" ] && sudo mv /usr/lib/python3.11/EXTERNALLY-MANAGED /usr/lib/python3.11/EXTERNALLY-MANAGED_backup || echo -e "${GREEN}Externally-Managed no found... ${END}"
+[ -f "/usr/lib/python3.12/EXTERNALLY-MANAGED" ] && sudo mv /usr/lib/python3.12/EXTERNALLY-MANAGED /usr/lib/python3.12/EXTERNALLY-MANAGED_backup || echo -e "${GREEN}Externally-Managed no found... ${END}"
 
 declare -A python_software
 python_software[castero]="castero"
