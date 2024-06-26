@@ -21,8 +21,9 @@
 #
 # -----------------------------------------------------------------
 
+xset s 1800 &
+xset dpms 1800 1800 1800 &
+lxsession &
 slstatus &
 nitrogen --restore &
-xfce4-power-manager &
 xautolock -time 10 -locker blurlock &
-#/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &

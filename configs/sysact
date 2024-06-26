@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #  ____             _                         ____          _
 # |  _ \  __ _ _ __| | ___ __   ___  ___ ___ / ___|___   __| | ___
 # | | | |/ _' | '__| |/ / '_ \ / _ \/ __/ __| |   / _ \ / _' |/ _ \
@@ -22,28 +22,60 @@
 #
 # -----------------------------------------------------------------
 
+# Check INIT
+_initsys=$(ps -p 1 o comm=)
+
+# dmenu
 font="-fn 'Noto-14'"
+DMENU="dmenu -i -c -l 6 $font -p"
 
-declare options=("Cancel
-Lock-Screen
-Exit
-Shutdown
-Reboot
-Suspend")
+# fzf
+FZF="fzf --ansi --cycle --margin=0.5% --color=dark --height 100% --reverse --info=hidden --prompt"
 
-choice=$(
-	echo -e "${options[@]}" |
-	dmenu -i -c -l 6 $font $nb $sb $sf $nf
-)
+declare -A main_menu
+main_menu[Exit]="kill -TERM $(pidof -s dwm)"
+main_menu[Lock Screen]="blurlock"
+main_menu[Cancel]="notify-send Cancel by-user"
+if [ $_initsys = "systemd" ]; then
+main_menu[Reboot]="systemctl reboot"
+main_menu[Shutdown]="systemctl poweroff"
+elif [ $_initsys = "runit" ]; then
+main_menu[Reboot]="loginctl reboot"
+main_menu[Shutdown]="loginctl poweroff"
+fi
 
-case "$choice" in
-	Cancel)	exit 1 ;;
-	Lock-Screen)	blurlock ;;
-	Exit)		kill -TERM $(pidof -s dwm) ;;
-	Shutdown)	systemctl poweroff ;;
-	Reboot)		systemctl reboot ;;
-	Suspend)	systemctl suspend ;;
-	*) exit 1 ;;
-esac
+menu() {
+	printf '%s\n' "${!main_menu[@]}" | sort
+}
 
-"$choice"
+main() {
+  while : ; do
+  	choice=$(menu | column -t -s "," -o " " | ${MENU} 'System Account : ' "$@") || exit 1
+
+    if [ "$choice" ]; then
+      ${main_menu["${choice}"]} && exit 0
+    else
+      echo "Program terminated." && exit 0
+    fi
+  done
+}
+
+noOpt=1
+# If script is run with '-d', it will use 'dmenu'
+# If script is run with '-f', it will use 'fzf'
+while getopts "dfh" arg 2>/dev/null; do
+    case "${arg}" in
+        d) # shellcheck disable=SC2153
+           MENU=${DMENU}
+           [[ "${BASH_SOURCE[0]}" == "${0}" ]] && main ;;
+        f) # shellcheck disable=SC2153
+           MENU=${FZF}
+           [[ "${BASH_SOURCE[0]}" == "${0}" ]] && main ;;
+        h) help ;;
+        *) printf '%s\n' "Error: invalid option" "Type $(basename "$0") -h for help" ;;
+    esac
+    noOpt=0
+done
+
+# If script is run with NO argument, it will use 'dmenu'
+[ $noOpt = 1 ] && MENU=${DMENU} && [[ "${BASH_SOURCE[0]}" == "${0}" ]] && main "$@"

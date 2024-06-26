@@ -52,17 +52,19 @@ sudo xbps-install -Syu
 ## Software
 declare -A software
 ## Liberies & Utilities
+software[ImageMagick]="ImageMagick"
+software[NetworkManager]="NetworkManager"
 software[alsa-utils]="alsa-utils"
 software[arandr]="arandr"
 software[curl]="curl"
 software[dunst]="dunst"
+software[elogind]="elogind"
 software[fuse-sshfs]="fuse-sshfs"
 software[gcc]="gcc"
 software[git]="git"
 software[gtk-engine-murrine]="gtk-engine-murrine"
 software[harfbuzz-devel]="harfbuzz-devel"
 software[i3lock]="i3lock"
-software[ImageMagick]="ImageMagick"
 software[intltool]="intltool"
 software[libX11-devel]="libX11-devel"
 software[libXft-devel]="libXft-devel"
@@ -75,17 +77,17 @@ software[lightdm]="lightdm"
 software[lm_sensors]="lm_sensors"
 software[lxsession]="lxsession"
 software[make]="make"
-software[NetworkManager]="NetworkManager"
 software[papirus-icon-theme]="papirus-icon-theme"
 software[picom]="picom"
 software[pkg-config]="pkg-config"
 software[polkit]="polkit"
+software[pulseaudio]="pulseaudio"
 software[python3-pip]="python3-pip"
 software[rsync]="rsync"
 software[scrot]="scrot"
 software[tlp]="tlp"
 software[udevil]="udevil"
-software[pulseaudio]="pulseaudio"
+software[ueberzug]="ueberzug"
 software[unzip]="unzip"
 software[upower-devel]="upower-devel"
 software[wget]="wget"
@@ -151,13 +153,10 @@ done
 ## Git Repos
 getsuckless="https://github.com/codedarkness/suckless.git"
 getdracula="https://github.com/dracula/gtk.git"
-getarigram="https://github.com/TruncatedDinosour/arigram.git"
 
 [ ! -d "suckless" ] && git clone $getsuckless $HOME/Templates/suckless || echo -e "${RED}Git repo already exist...${END}"
 
 [ ! -d "gtk" ] && git clone $getdracula $HOME/Templates/gtk && sudo mv $HOME/Templates/gtk /usr/share/themes/Dracula || echo -e "${RED}LinuxSucks..........${END}"
-
-[ ! -d "arigram" ] && git clone $getarigram $HOME/Templates/arigram && cd $HOME/Templates/arigram && ./do local &&  sudo rm -r $HOME/Templates/arigram || echo -e "${RED}Git repo already exist...${END}"
 
 ## Config files & Directories
 declare -A files
@@ -179,7 +178,6 @@ done
 declare -A conf_directories
 conf_directories[alacritty]="$HOME/Templates/suckless/configs/alacritty $HOME/.config"
 conf_directories[amfora]="$HOME/Templates/suckless/configs/amfora $HOME/.config"
-conf_directories[arigram]="$HOME/Templates/suckless/configs/arigram $HOME/.config"
 conf_directories[castero]="$HOME/Templates/suckless/configs/castero $HOME/.config"
 conf_directories[dunst]="$HOME/Templates/suckless/configs/dunst $HOME/.config"
 conf_directories[gtk2]="$HOME/Templates/suckless/configs/gtk-2.0 $HOME/.config"
@@ -227,7 +225,13 @@ sudo sed -i 's/#greeter-session=example-gtk-gnome/greeter-session=lightdm-mini-g
 sudo sed -i 's/#user-session=default/user-session=dwm/g' /etc/lightdm/lightdm.conf &&
 sudo chmod +x /usr/bin/blurlock &&
 sudo chmod +x /usr/bin/dc-scrot &&
-python -m pip install --user --upgrade pynvim &&
+
+sudo rm /var/service/acpid &&
+sudo rm /var/service/wpa_supplicant &&
+sudo ln -s /etc/sv/elogind /var/service/ &&
+sudo ln -s /etc/sv/dbus /var/service/ &&
+sudo ln -s /etc/sv/NetworkManager /var/service/ &&
+
 rm $HOME/void-suckless.sh &&
 rm $HOME/suckless-linux.sh &&
 echo -e "${GREEN}Setup is done!!${END}" || echo -e "${RED}LinuxSucks..........${END}"
@@ -243,9 +247,7 @@ while true; do
 	read -p "Enable lightdm [y - n] : " yn
 	case $yn in
 		[Yy]* )
-			#sudo ln -s /etc/sv/NetworkManager /var/service/NetworkManager
-			sudo ln -s /etc/sv/dbus /var/service/dbus
-			sudo ln -s /etc/sv/lightdm /var/service/lightdm; exit ;;
+			sudo ln -s /etc/sv/lightdm /var/service/; exit ;;
 		[Nn]* )
 			echo -e "${RED}Don't forget to enable lightdm after reboot${END}"; break ;;
 		*)	echo "Please answer yes or no."
