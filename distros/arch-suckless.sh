@@ -107,22 +107,11 @@ software[lxappearance]="lxappearance"
 software[nitrogen]="nitrogen"
 software[qutebrowser]="qutebrowser"
 software[sxiv]="sxiv"
-software[xfce4-power-manager]="xfce4-power-manager"
+#software[xfce4-power-manager]="xfce4-power-manager"
 software[zathura-pdf-poppler]="zathura-pdf-poppler"
 software[zathura]="zathura"
 
 sudo pacman -S --noconfirm --needed "${software[@]}" && echo -e "${GREEN}Success.....${END}" || echo -e "${RED}LinuxSucks..........${END}"
-
-## Removing the annoying python warning for external python packages
-[ -f "/usr/lib/python3.12/EXTERNALLY-MANAGED" ] && sudo mv /usr/lib/python3.12/EXTERNALLY-MANAGED /usr/lib/python3.12/EXTERNALLY-MANAGED_backup || echo -e "${GREEN}Externally-Managed no found... ${END}"
-
-declare -A python_software
-python_software[castero]="castero"
-python_software[pyradio]="pyradio"
-python_software[youtube-dl]="youtube_dl"
-python_software[yt-dlp]="yt-dlp"
-
-pip install "${python_software[@]}" && echo -e "${GREEN}Success.....${END}" || echo -e "${RED}LinuxSucks..........${END}"
 
 ## Directories
 declare -A directories
@@ -146,14 +135,11 @@ done
 ## Git Repos
 getsuckless="https://github.com/codedarkness/suckless.git"
 getdracula="https://github.com/dracula/gtk.git"
-getarigram="https://github.com/TruncatedDinosour/arigram.git"
 getminigreeter="https://github.com/prikhi/lightdm-mini-greeter.git"
 
 [ ! -d "suckless" ] && git clone $getsuckless $HOME/Templates/suckless || echo -e "${RED}Git repo already exist...${END}"
 
 [ ! -d "gtk" ] && git clone $getdracula $HOME/Templates/gtk && sudo mv $HOME/Templates/gtk /usr/share/themes/Dracula || echo -e "${RED}LinuxSucks..........${END}"
-
-[ ! -d "arigram" ] && git clone $getarigram $HOME/Templates/arigram && cd $HOME/Templates/arigram && ./do local && sudo rm -r $HOME/Templates/arigram || echo -e "${RED}Git repo already exist...${END}"
 
 [ ! -d "minigreeter" ] && git clone $getminigreeter $HOME/Templates/minigreeter && cd $HOME/Templates/minigreeter && ./autogen.sh && ./configure --datadir=/usr/share --bindir=/usr/bin --sysconfdir=/etc && make && sudo make install && sudo rm -r $HOME/Templates/minigreeter || echo -e "${RED}Git repo already exist...${END}"
 
@@ -225,13 +211,7 @@ sudo sed -i 's/#greeter-session=example-gtk-gnome/greeter-session=lightdm-mini-g
 sudo sed -i 's/#user-session=default/user-session=dwm/g' /etc/lightdm/lightdm.conf &&
 sudo chmod +x /usr/bin/blurlock &&
 sudo chmod +x /usr/bin/dc-scrot &&
-python -m pip install --user --upgrade pynvim &&
 sudo systemctl enable lightdm -f &&
-sudo ln -s $HOME/.local/bin/arigram /usr/bin &&
-sudo ln -s $HOME/.local/bin/castero /usr/bin &&
-sudo ln -s $HOME/.local/bin/pyradio /usr/bin &&
-sudo ln -s $HOME/.local/bin/yt-dlp /usr/bin &&
-sudo ln -s $HOME/.local/bin/youtube_dl /usr/bin &&
 rm $HOME/arch-suckless.sh &&
 rm $HOME/suckless-linux.sh &&
 echo -e "${GREEN}Setup is done!!${END}" || echo -e "${RED}LinuxSucks..........${END}"

@@ -129,22 +129,11 @@ software[lxappearance]="lxappearance"
 software[nitrogen]="nitrogen"
 software[qutebrowser]="qutebrowser"
 software[sxiv]="sxiv"
-software[xfce4-power-manager]="xfce4-power-manager"
+#software[xfce4-power-manager]="xfce4-power-manager"
 software[zathura-pdf-poppler]="zathura-pdf-poppler"
 software[zathura]="zathura"
 
 sudo apt install -y "${software[@]}" && echo -e "${GREEN}Success.....${END}" || echo -e "${RED}LinuxSucks..........${END}"
-
-## Removing the annoying python warning for external python packages
-[ -f "/usr/lib/python3.11/EXTERNALLY-MANAGED" ] && sudo mv /usr/lib/python3.11/EXTERNALLY-MANAGED /usr/lib/python3.11/EXTERNALLY-MANAGED_backup || echo -e "${GREEN}Externally-Managed no found... ${END}"
-
-declare -A python_software
-python_software[castero]="castero"
-python_software[pyradio]="pyradio"
-python_software[youtube-dl]="youtube_dl"
-python_software[yt-dlp]="yt-dlp"
-
-pip install "${python_software[@]}" && echo -e "${GREEN}Success.....${END}" || echo -e "${RED}LinuxSucks..........${END}"
 
 ## Directories
 declare -A directories
@@ -162,13 +151,9 @@ for directory in ${directories[@]}; do
     [ ! -d "$directory" ] && mkdir -p "$directory" && echo -e "${GREEN}$directory${END} Directoy vas created" || echo -e "${RED}$directory${END} already exist..."
 done
 
-## checking xsession directory
-#[ ! -d "/usr/share/xsessions" ] && sudo mkdir -p /usr/share/xsessions && echo -e "${GREEN}$directory${END} Directoy vas created" || echo -e "${RED}xsessions${END} directory already exist..."
-
 ## Git Repos
 getsuckless="https://github.com/codedarkness/suckless.git"
 getdracula="https://github.com/dracula/gtk.git"
-getarigram="https://github.com/TruncatedDinosour/arigram.git"
 getminigreeter="https://github.com/prikhi/lightdm-mini-greeter.git"
 getmusikcube=$(curl -s https://api.github.com/repos/clangen/musikcube/releases/latest | grep "browser_download_url.*amd64.deb" | cut -d '"' -f 4)
 
@@ -176,12 +161,7 @@ getmusikcube=$(curl -s https://api.github.com/repos/clangen/musikcube/releases/l
 
 [ ! -d "$HOME/Templates/gtk" ] && git clone $getdracula $HOME/Templates/gtk && sudo mv $HOME/Templates/gtk /usr/share/themes/Dracula || echo -e "${RED}LinuxSucks..........${END}"
 
-[ ! -d "$HOME/Templates/arigram" ] && git clone $getarigram $HOME/Templates/arigram && cd $HOME/Templates/arigram && ./do local && sudo rm -r $HOME/Templates/arigram || echo -e "${RED}Git repo already exist...${END}"
-
 [ ! -d "$HOME/Templates/minigreeter" ] && git clone $getminigreeter $HOME/Templates/minigreeter && cd $HOME/Templates/minigreeter && ./autogen.sh && ./configure --datadir=/usr/share --bindir=/usr/bin --sysconfdir=/etc && make && sudo make install && sudo rm -r $HOME/Templates/minigreeter || echo -e "${RED}Git repo already exist...${END}"
-
-echo "Press Enter to Continue"
-read
 
 [ ! -f "musikcube.deb" ] && wget -O musikcube.deb $getmusikcube && sudo apt install ./musikcube.deb && rm musikcube.deb || echo -e "${RED}LinuxSucks..........${END}" 
 
@@ -245,13 +225,6 @@ for suck in ${suckless[@]}; do
     cd $suck && sudo make clean install || echo -e "${RED}LinuxSucks..........${END}"
 done
 
-## Check for binaries installed with pip
-[ -f "/usr/bin/arigram" ] && echo -e "${GREEN}Arigram${END} Found" || sudo ln -s $HOME/.local/bin/arigram /usr/bin
-[ -f "/usr/bin/castero" ] && echo -e "${GREEN}Castero${END} Found" || sudo ln -s $HOME/.local/bin/castero /usr/bin
-[ -f "/usr/bin/pyradio" ] && echo -e "${GREEN}PyRadio${END} Found" || sudo ln -s $HOME/.local/bin/pyradio /usr/bin
-[ -f "/usr/bin/yt-dlp" ] && echo -e "${GREEN}YT-DLP${END} Found" || sudo ln -s $HOME/.local/bin/yt-dlp /usr/bin
-[ -f "/usr/bin/youtube_dl" ] && echo -e "${GREEN}Youtube_dl${END} Found" || sudo ln -s $HOME/.local/bin/youtube_dl /usr/bin
-
 ## Setup Lighdm and greeter and wallpaper
 sed -i 's/USER/'$_user'/g' $HOME/.config/nitrogen/bg-saved.cfg &&
 sed -i 's/USER/'$_user'/g' $HOME/.config/nitrogen/nitrogen.cfg &&
@@ -260,7 +233,6 @@ sudo sed -i 's/#greeter-session=example-gtk-gnome/greeter-session=lightdm-mini-g
 sudo sed -i 's/#user-session=default/user-session=dwm/g' /etc/lightdm/lightdm.conf &&
 sudo chmod +x /usr/bin/blurlock &&
 sudo chmod +x /usr/bin/dc-scrot &&
-python3 -m pip install --user --upgrade pynvim &&
 sudo systemctl enable lightdm &&
 rm $HOME/debian-suckless.sh &&
 rm $HOME/suckless-linux.sh &&
