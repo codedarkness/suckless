@@ -96,6 +96,7 @@ software[xautolock]="xautolock"
 software[xorg-fonts]="xorg-fonts"
 software[xorg]="xorg"
 software[zip]="zip"
+software[noto-fonts-emoji]="noto-fonts-emoji"
 ## TUIs & CLIs
 software[alacritty]="alacritty"
 software[amfora]="amfora"
