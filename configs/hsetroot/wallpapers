@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# Set a random wallpaper using hsetroot
+
+# Directory containing wallpapers
+DIR="$HOME/Pictures/Wallpapers"
+
+# Check directory exist
+if [[ ! -d "$DIR" ]]; then
+    notify-send "Directory not found: $DIR"
+    exit 1
+fi
+
+# Find all JPG/PNG images and select one at random
+images=("$DIR"/*.png)
+
+# Check if any images were found
+if [[ ${#images[@]} -eq 0 ]]; then
+    notify-send "No images found in $DIR"
+    exit 1
+fi
+
+# Select a random image using $RANDOM
+random_index=$(( RANDOM % ${#images[@]} ))
+selected_image="${images[$random_index]}"
+
+# Set wallpaper using hsetroot
+hsetroot -solid "#1F1E29" -cover "$selected_image"
